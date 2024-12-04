@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>productos</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+
+    <style>
+        h1.titulo {
+            font-size: 50px; 
+            color: #FF6347;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); 
+        }
+
+        .add {
+            text-decoration: none;
+            color: #fff; 
+            border-radius: 25px; 
+            background-color: #28a745; 
+            padding: 12px 25px;
+            font-size: 16px;
+            transition: all 0.3s ease; 
+        }
+
+        .add:hover {
+            background-color: #218838; 
+        }
+
+        .card {
+            border: 3px solid #28a745; 
+            background-color: #333; 
+            border-radius: 10px; 
+            margin: 15px;
+            overflow: hidden; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px); 
+        }
+
+        .card img {
+            width: 100%;
+            height: auto; 
+            border-bottom: 3px solid #28a745; 
+        }
+
+        .product {
+            color: #f0f0f0; 
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .titulo {
+            font-size: 50px;
+            color: #FF6347;
+            margin-bottom: 30px; 
+        }
+
+        .product p {
+            font-size: 1.1rem; 
+            margin: 5px 0;
+            color: #ccc; 
+        }
+
+        .product .category {
+            font-weight: normal; 
+            color: #66ccff; 
+        }
+
+        
+        form button {
+            background-color: #dc3545; 
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px; 
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; 
+        }
+
+        form button:hover {
+            background-color: #c82333; 
+        }
+
+        a {
+            text-decoration: none;
+            color: #00bcd4; 
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0288d1;
+        }
+
+        .container {
+            padding: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <%- include('../partials/header')%>
+
+    <div class="container">
+        <h1 class="titulo">productos</h1>
+        <a href="/productos/create" class="add">Añadir Producto</a>
+        <br><br><br>
+
+        <div>
+            <% productos.forEach(Producto => {%>
+                <div class="card">
+                    <div>
+                        <img src="/images/<%=Producto.imagen%>" alt="<%=Producto.nombre%>">
+                    </div>    
+                    <h2 class="product name"><%=Producto.nombre%></h2>
+                    <p class="product description"><%=Producto.descripcion%></p>
+                    <p class="product price">$<%=Producto.precio%></p>
+                    <p class="product category"><strong>Categoria: <%=Producto.nombre%></strong></p>
+                </div>
+                <div>
+                    <a href="/productos/<%=Producto.id%>/edit">Editar Producto</a>
+
+                    <form action="/productos/<%=Producto.id%>?_method=DELETE" method="POST">
+                        <button type="submit">Eliminar Producto</button>
+                    </form>
+                </div>
+
+            <% }) %>
+        </div>
+
+        <a href="/">Volver a la página principal</a>
+    </div>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>

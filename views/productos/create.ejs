@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de electrodomesticos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9f1f7; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; 
+        }
+
+        header {
+            background-color: #34495e; 
+            color: #fff;
+            padding: 15px 30px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2980b9; 
+            margin-bottom: 20px;
+            font-size: 2.5rem; 
+        }
+
+        .form-container {
+            background-color: #fff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+            border-radius: 12px; 
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            margin: 30px auto;
+            border: 2px solid #ccc; 
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #34495e; 
+        }
+
+        input, textarea, select {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #3498db; 
+            border-radius: 8px; 
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            border: 2px dashed #3498db; 
+            padding: 12px;
+        }
+
+        button {
+            background-color: #3498db; 
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9; 
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        select {
+            padding: 12px;
+            background-color: #ecf0f1; 
+            border: 2px solid #3498db;
+        }
+
+        
+        form button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <div class="form-container">
+        <h1>Formulario de Creación de Productos</h1>
+        <form action="/productos/create" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="nombre">Nombre: </label>
+                <input type="text" name="nombre" id="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción: </label>
+                <textarea name="descripcion" id="descripcion" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio: </label>
+                <input type="number" name="precio" id="precio" required>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen">Imagen: </label>
+                <input type="file" name="imagen" id="imagen">
+            </div>
+
+            <div class="form-group">
+                <label for="categoria_id">Categoría: </label>
+                <select name="categoria_id" id="categoria_id">
+                    <% categorias.forEach(categoria => { %>
+                        <option value="<%= categoria.id %>"><%= categoria.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <button type="submit">Añadir Producto</button>
+        </form>
+    </div>
+</body>
+</html>
